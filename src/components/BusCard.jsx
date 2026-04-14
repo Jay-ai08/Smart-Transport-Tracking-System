@@ -88,8 +88,8 @@ const BusCard = ({ bus }) => {
 
       {/* Footer Coords */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--border-color)', opacity: 0.5 }}>
-        <p style={{ fontSize: '10px', color: 'var(--text-primary)', letterSpacing: '0.05em', fontFamily: 'monospace' }}>Lat: {bus.lat ? bus.lat.toFixed(4) : '29.4726'}</p>
-        <p style={{ fontSize: '10px', color: 'var(--text-primary)', letterSpacing: '0.05em', fontFamily: 'monospace' }}>Lng: {bus.lng ? bus.lng.toFixed(4) : '77.6949'}</p>
+        <p style={{ fontSize: '10px', color: 'var(--text-primary)', letterSpacing: '0.05em', fontFamily: 'monospace' }}>Lat: {bus.lat ? bus.lat.toFixed(4) : '29.1492'}</p>
+        <p style={{ fontSize: '10px', color: 'var(--text-primary)', letterSpacing: '0.05em', fontFamily: 'monospace' }}>Lng: {bus.lng ? bus.lng.toFixed(4) : '76.6530'}</p>
       </div>
 
     </div>

@@ -68,50 +68,64 @@ const MapView = ({ fullMode = true, customCenter = null, selectedBusId = null })
 
   const selectedBus = selectedBusId ? buses.find(b => b.id === selectedBusId) : null;
   const selectedRoute = selectedBus ? routes.find(r => r.id === selectedBus.routeId) : null;
-  const mapCenter = selectedBus ? [selectedBus.lat, selectedBus.lng] : customCenter || [29.3909, 76.9635];
+  const mapCenter = selectedBus ? [selectedBus.lat, selectedBus.lng] : customCenter || [29.1492, 76.6530];
+  const activeRouteIds = new Set(buses.map(bus => bus.routeId));
+  const activeRoutes = routes.filter(route => activeRouteIds.has(route.id));
 
   return (
     <div style={{ width: '100%', height: '100%', padding: 0, position: 'relative' }}>
       {/* Set MapContainer to fill parent exactly */}
-      <MapContainer whenCreated={setMap} center={mapCenter} zoom={14} scrollWheelZoom={true} style={{ width: '100%', height: '100%', zIndex: 1 }}>
+      <MapContainer whenCreated={setMap} center={mapCenter} zoom={12} scrollWheelZoom={true} style={{ width: '100%', height: '100%', zIndex: 1 }}>
         <TileLayer
           attribution='&copy; OpenStreetMap'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/* Draw only selected route */}
+        {/* Draw all active routes */}
+        {activeRoutes.map(route => (
+          <Polyline
+            key={route.id}
+            positions={route.path}
+            color="#60a5fa"
+            weight={2}
+            opacity={0.28}
+            dashArray="8 10"
+          />
+        ))}
+
+        {/* Highlight selected route if one is chosen */}
         {selectedBus && selectedRoute && (
-          <>
-            <Polyline 
-              positions={selectedRoute.path} 
-              color={selectedBus.colorHex || '#3b82f6'} 
-              weight={3}
-              opacity={0.7}
-            />
-            {selectedRoute.stops.map(stop => (
-              <Marker key={stop.id} position={[stop.lat, stop.lng]} icon={StopMarker}>
-                <Popup>{stop.name}</Popup>
-              </Marker>
-            ))}
-          </>
+          <Polyline
+            positions={selectedRoute.path}
+            color={selectedBus.colorHex || '#3b82f6'}
+            weight={4}
+            opacity={0.85}
+          />
         )}
 
-        {/* Draw only selected bus marker */}
-        {selectedBus && (
-          <Marker 
-            key={selectedBus.id} 
-            position={[selectedBus.lat, selectedBus.lng]} 
-            icon={createCustomMarker(selectedBus.colorHex || '#3b82f6', true)}
-            style={{ transition: 'all 0.5s linear' }}
+        {/* Render all bus markers */}
+        {buses.map(bus => (
+          <Marker
+            key={bus.id}
+            position={[bus.lat, bus.lng]}
+            icon={createCustomMarker(bus.colorHex || '#3b82f6', bus.id === selectedBusId)}
           >
             <Popup>
-              <strong>GU-{selectedBus.busNumber}</strong><br/>
-              Status: {selectedBus.status}<br/>
-              Next: {selectedBus.nextStop}<br/>
-              ETA: {selectedBus.eta}
+              <strong>GU-{bus.busNumber}</strong><br/>
+              Route: {routes.find(r => r.id === bus.routeId)?.name || 'Unknown'}<br/>
+              Status: {bus.status}<br/>
+              Next: {bus.nextStop}<br/>
+              ETA: {bus.eta}
             </Popup>
           </Marker>
-        )}
+        ))}
+
+        {/* Draw stops for selected route only */}
+        {selectedBus && selectedRoute && selectedRoute.stops.map(stop => (
+          <Marker key={stop.id} position={[stop.lat, stop.lng]} icon={StopMarker}>
+            <Popup>{stop.name}</Popup>
+          </Marker>
+        ))}
       </MapContainer>
 
       {selectedBus && map && (

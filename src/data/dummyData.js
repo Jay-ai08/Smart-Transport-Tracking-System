@@ -1,145 +1,137 @@
-// Panipat Area Coordinates ~ 29.3909, 76.9635
+// Center coordinates updated to 29.1492, 76.6530
 
 export const mockRoutes = [
   {
-    id: 'r1',
-    name: 'North Campus Loop',
-    stops: [
-      { id: 's1', name: 'Main Gate', lat: 29.3950, lng: 76.9650 },
-      { id: 's2', name: 'Library', lat: 29.3980, lng: 76.9680 },
-      { id: 's3', name: 'Science Block', lat: 29.4000, lng: 76.9600 },
-      { id: 's4', name: 'North Hostel', lat: 29.3950, lng: 76.9550 },
-    ],
-    path: [
-      [29.3950, 76.9650],
-      [29.3962, 76.9665],
-      [29.3980, 76.9680],
-      [29.3994, 76.9672],
-      [29.4004, 76.9635],
-      [29.3992, 76.9595],
-      [29.3965, 76.9560],
-      [29.3950, 76.9550],
-      [29.3955, 76.9582],
-      [29.3950, 76.9650]
-    ]
-  },
-  {
-    id: 'r2',
-    name: 'South Express',
-    stops: [
-      { id: 's1', name: 'Main Gate', lat: 29.3900, lng: 76.9600 },
-      { id: 's5', name: 'Student Union', lat: 29.3850, lng: 76.9580 },
-      { id: 's6', name: 'Engineering Dept', lat: 29.3800, lng: 76.9650 },
-      { id: 's7', name: 'Sports Complex', lat: 29.3850, lng: 76.9700 },
-    ],
-    path: [
-      [29.3900, 76.9600],
-      [29.3885, 76.9590],
-      [29.3862, 76.9583],
-      [29.3850, 76.9580],
-      [29.3838, 76.9588],
-      [29.3817, 76.9615],
-      [29.3800, 76.9650],
-      [29.3825, 76.9685],
-      [29.3845, 76.9695],
-      [29.3850, 76.9700],
-      [29.3875, 76.9692],
-      [29.3900, 76.9600]
-    ]
-  },
-  {
     id: 'r3',
-    name: 'City Shuttle',
+    name: 'Sonipat → Geeta University',
     stops: [
-      { id: 's8', name: 'Panipat Station', lat: 29.3920, lng: 76.9750 },
-      { id: 's9', name: 'Market Hub', lat: 29.3960, lng: 76.9800 },
+      { id: 's8', name: 'Sonipat Bus Stand', lat: 28.9900, lng: 77.0219 },
+      { id: 's9', name: 'Murthal Toll', lat: 29.0200, lng: 76.9680 },
+      { id: 's10', name: 'Panipat Junction', lat: 29.3960, lng: 76.9750 },
+      { id: 's11', name: 'Geeta University Nauthla', lat: 29.4035, lng: 76.9660 },
     ],
     path: [
-      [29.3920, 76.9750],
-      [29.3930, 76.9762],
-      [29.3944, 76.9775],
-      [29.3954, 76.9783],
-      [29.3960, 76.9800],
-      [29.3948, 76.9787],
-      [29.3934, 76.9768],
-      [29.3920, 76.9750]
+      [28.9900, 77.0219],
+      [28.9950, 77.0100],
+      [29.0050, 76.9920],
+      [29.0200, 76.9680],
+      [29.0450, 76.9700],
+      [29.1000, 76.9720],
+      [29.2200, 76.9700],
+      [29.3200, 76.9680],
+      [29.3700, 76.9650],
+      [29.3950, 76.9630],
+      [29.4035, 76.9660]
     ]
   },
   {
-    id: 'r4',
-    name: 'Evening Special',
+    id: 'r5',
+    name: 'Geeta University → Murthal',
     stops: [
-      { id: 's10', name: 'Hostel A', lat: 29.3880, lng: 76.9500 },
-      { id: 's11', name: 'Hostel B', lat: 29.4020, lng: 76.9500 },
+      { id: 's12', name: 'Geeta University Nauthla', lat: 29.4035, lng: 76.9660 },
+      { id: 's13', name: 'Bursham', lat: 29.3920, lng: 76.9510 },
+      { id: 's14', name: 'Khalila', lat: 29.3800, lng: 76.9560 },
+      { id: 's15', name: 'Samalkha', lat: 29.3620, lng: 76.9530 },
+      { id: 's16', name: 'Murthal', lat: 29.0200, lng: 76.9680 },
     ],
     path: [
-      [29.3880, 76.9500],
-      [29.3895, 76.9512],
-      [29.3920, 76.9525],
-      [29.3948, 76.9545],
-      [29.3950, 76.9550],
-      [29.3978, 76.9525],
-      [29.3995, 76.9508],
-      [29.4020, 76.9500],
-      [29.3990, 76.9508],
-      [29.3950, 76.9550],
-      [29.3880, 76.9500]
+      [29.4035, 76.9660],
+      [29.3920, 76.9510],
+      [29.3800, 76.9560],
+      [29.3620, 76.9530],
+      [29.0200, 76.9680]
+    ]
+  },
+  {
+    id: 'r6',
+    name: 'Safidon → Geeta University',
+    stops: [
+      { id: 's15', name: 'Safidon Bus Stand', lat: 29.4100, lng: 76.6700 },
+      { id: 's16', name: 'Madlauda', lat: 29.1400, lng: 76.8600 },
+      { id: 's17', name: 'Geeta University Nauthla', lat: 29.4035, lng: 76.9660 },
+    ],
+    path: [
+      [29.4100, 76.6700],
+      [29.4300, 76.7200],
+      [29.4500, 76.7800],
+      [29.4700, 76.8400],
+      [29.4900, 76.9000],
+      [29.5200, 76.9400],
+      [29.1400, 76.8600],
+      [29.4035, 76.9660]
+    ]
+  },
+  {
+    id: 'r7',
+    name: 'Jind → Geeta University',
+    stops: [
+      { id: 's18', name: 'Jind Bus Stand', lat: 29.3200, lng: 76.3100 },
+      { id: 's19', name: 'Safidon Bus Stand', lat: 29.4100, lng: 76.6700 },
+      { id: 's20', name: 'Geeta University Nauthla', lat: 29.4035, lng: 76.9660 },
+    ],
+    path: [
+      [29.3200, 76.3100],
+      [29.3400, 76.4300],
+      [29.3800, 76.5600],
+      [29.4100, 76.6700],
+      [29.4300, 76.7800],
+      [29.4500, 76.8800],
+      [29.4035, 76.9660]
     ]
   }
 ];
 
 export const mockBuses = [
   {
-    id: 'b1',
-    busNumber: '101',
-    routeId: 'r1',
-    status: 'On Time',
-    lat: 29.3950,
-    lng: 76.9650,
-    nextStop: 'Library',
-    eta: '2 mins',
-    pathIndex: 0,
-    crowdLevel: 'Low',
-    colorHex: '#10b981' // Green
-  },
-  {
-    id: 'b2',
-    busNumber: '102',
-    routeId: 'r2',
-    status: 'Delayed',
-    lat: 29.3900,
-    lng: 76.9600,
-    nextStop: 'Student Union',
-    eta: '5 mins',
-    delayMinutes: 5,
-    pathIndex: 0,
-    crowdLevel: 'Medium',
-    colorHex: '#f59e0b' // Orange/Yellow
-  },
-  {
     id: 'b3',
     busNumber: '201',
     routeId: 'r3',
     status: 'On Time',
-    lat: 29.3920,
-    lng: 76.9750,
-    nextStop: 'Market Hub',
-    eta: '7 mins',
-    pathIndex: 0,
-    crowdLevel: 'Full',
+    lat: 28.9945,
+    lng: 77.0070,
+    nextStop: 'Murthal Toll',
+    eta: '15 mins',
+    pathIndex: 1,
+    crowdLevel: 'Medium',
     colorHex: '#06b6d4' // Cyan
   },
   {
-    id: 'b4',
-    busNumber: '301',
-    routeId: 'r4',
+    id: 'b5',
+    busNumber: '501',
+    routeId: 'r5',
     status: 'On Time',
-    lat: 29.3880,
-    lng: 76.9500,
-    nextStop: 'Hostel B',
-    eta: '3 mins',
+    lat: 29.4035,
+    lng: 76.9660,
+    nextStop: 'Bursham',
+    eta: '55 mins',
     pathIndex: 0,
-    crowdLevel: 'Low',
-    colorHex: '#ef4444' // Red
+    crowdLevel: 'Medium',
+    colorHex: '#0ea5e9' // Blue
+  },
+  {
+    id: 'b6',
+    busNumber: '601',
+    routeId: 'r6',
+    status: 'On Time',
+    lat: 29.4100,
+    lng: 76.6700,
+    nextStop: 'Panipat Junction',
+    eta: '70 mins',
+    pathIndex: 0,
+    crowdLevel: 'Medium',
+    colorHex: '#3b82f6' // Indigo
+  },
+  {
+    id: 'b7',
+    busNumber: '701',
+    routeId: 'r7',
+    status: 'On Time',
+    lat: 29.3200,
+    lng: 76.3100,
+    nextStop: 'Safidon Bus Stand',
+    eta: '80 mins',
+    pathIndex: 0,
+    crowdLevel: 'Medium',
+    colorHex: '#8b5cf6' // Violet
   }
 ];

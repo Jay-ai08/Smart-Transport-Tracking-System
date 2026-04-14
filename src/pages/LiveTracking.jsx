@@ -1,11 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Bus } from 'lucide-react';
 import { TransportContext } from '../context/TransportContext';
 import MapView from '../components/MapView';
 
 const LiveTracking = () => {
   const { buses, routes } = useContext(TransportContext);
-  const [searchParams] = useSearchParams();
 
   const displayBuses = buses.map(bus => ({
     ...bus,
@@ -13,9 +12,7 @@ const LiveTracking = () => {
   }));
 
   const [selectedBusId, setSelectedBusId] = useState(() => displayBuses?.[0]?.id || null);
-  const activeBusId = searchParams.get('busId') || selectedBusId;
-
-  const visualBusGrid = displayBuses;
+  const activeBusId = selectedBusId;
 
   return (
     <div className="live-tracking-page">
@@ -27,28 +24,42 @@ const LiveTracking = () => {
       </div>
 
       <div className="live-card-grid">
-        {visualBusGrid.slice(0, 8).map(bus => (
+        {displayBuses.map(bus => (
           <div
             key={bus.id}
             className={`live-card ${bus.id === activeBusId ? 'selected' : ''}`}
             onClick={() => setSelectedBusId(bus.id)}
           >
             <div className="live-card-top">
-              <div className="live-card-badge" style={{ backgroundColor: bus.colorHex || 'var(--primary-color)' }} />
+              <div className="live-card-badge" style={{ backgroundColor: bus.colorHex || 'var(--primary-color)' }}>
+                <Bus size={16} color="white" />
+              </div>
               <div>
                 <p className="live-card-title">GU-{bus.busNumber}</p>
                 <p className="live-card-subtitle">{bus.routeName}</p>
               </div>
               {bus.id === activeBusId && (
-                <span className="live-card-active">Active</span>
+                <span className="live-card-active">Selected</span>
               )}
+            </div>
+
+            <div className="live-card-details">
+              <div>
+                <strong>Status:</strong> {bus.status}
+              </div>
+              <div>
+                <strong>Next stop:</strong> {bus.nextStop}
+              </div>
+              <div>
+                <strong>ETA:</strong> {bus.eta}
+              </div>
             </div>
           </div>
         ))}
       </div>
 
       <div className="live-map-container">
-        <MapView fullMode={true} customCenter={[29.3909, 76.9635]} selectedBusId={activeBusId} />
+        <MapView fullMode={true} customCenter={[29.1492, 76.6530]} selectedBusId={activeBusId} />
       </div>
     </div>
   );
