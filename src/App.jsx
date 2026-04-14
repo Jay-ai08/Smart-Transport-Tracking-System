@@ -8,6 +8,7 @@ import Notifications from './pages/Notifications';
 import AdminPanel from './pages/AdminPanel';
 import { ThemeContext } from './context/ThemeContext';
 import { Moon, Sun, Menu } from 'lucide-react';
+import './App.css';
 
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);

@@ -24,6 +24,19 @@
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
+
+  --route-card-bg: rgba(255, 255, 255, 0.95);
+  --route-card-active-bg: rgba(56, 189, 248, 0.15);
+  --route-card-icon-bg: rgba(56, 189, 248, 0.18);
+  --route-modal-overlay-bg: rgba(243, 244, 246, 0.8);
+  --route-modal-bg: rgba(255, 255, 255, 0.99);
+  --route-modal-border: rgba(229, 231, 235, 0.85);
+  --route-modal-stop-bg: rgba(255, 255, 255, 0.92);
+  --route-modal-stop-border: rgba(209, 213, 219, 0.8);
+  --route-modal-text: #111827;
+  --route-modal-close-bg: rgba(15, 23, 42, 0.05);
+  --route-modal-close-color: #111827;
+  --route-modal-footer-border: rgba(209, 213, 219, 0.65);
 }
 
 [data-theme='dark'] {
@@ -45,12 +58,31 @@
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+
+  --route-card-bg: rgba(255, 255, 255, 0.05);
+  --route-card-active-bg: rgba(56, 189, 248, 0.12);
+  --route-card-icon-bg: rgba(56, 189, 248, 0.18);
+  --route-modal-overlay-bg: rgba(8, 15, 30, 0.86);
+  --route-modal-bg: rgba(15, 23, 42, 0.99);
+  --route-modal-border: rgba(255, 255, 255, 0.08);
+  --route-modal-stop-bg: rgba(255, 255, 255, 0.03);
+  --route-modal-stop-border: rgba(255, 255, 255, 0.06);
+  --route-modal-text: #f9fafb;
+  --route-modal-close-bg: rgba(255, 255, 255, 0.08);
+  --route-modal-close-color: #f9fafb;
+  --route-modal-footer-border: rgba(255, 255, 255, 0.12);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -66,6 +98,8 @@ body {
 .app-layout {
   display: flex;
   min-height: 100vh;
+  width: 100%;
+  min-width: 0;
 }
 
 .sidebar {
@@ -79,6 +113,7 @@ body {
 
 .main-content {
   flex: 1;
+  min-width: 0;
   padding: 2rem 3rem;
   overflow-y: auto;
 }
@@ -248,6 +283,7 @@ ul {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
     z-index: 999;
     opacity: 0;
