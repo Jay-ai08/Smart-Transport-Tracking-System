@@ -6,9 +6,10 @@
   --surface-color: #ffffff;
   --text-primary: #111827;
   --text-secondary: #4b5563;
+  --sidebar-bg: #e5e7eb;
   
-  --primary-color: #3b82f6;
-  --primary-hover: #2563eb;
+  --primary-color: #06b6d4; /* Cyan */
+  --primary-hover: #0891b2;
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --danger-color: #ef4444;
@@ -26,19 +27,20 @@
 }
 
 [data-theme='dark'] {
-  /* Vanilla CSS Variables for dark mode */
-  --bg-color: #111827;
-  --surface-color: #1f2937;
+  /* Deep Navy Dark Mode for Geeta UI matching */
+  --bg-color: #050b14;
+  --surface-color: #0a1120;
+  --sidebar-bg: #0a1120;
   --text-primary: #f9fafb;
-  --text-secondary: #9ca3af;
+  --text-secondary: #94a3b8;
   
-  --primary-color: #3b82f6; /* Keep primary consistent or tweak for dark mode */
-  --primary-hover: #60a5fa;
-  --success-color: #34d399;
+  --primary-color: #06b6d4; /* Accent Cyan */
+  --primary-hover: #22d3ee;
+  --success-color: #10b981;
   --warning-color: #fbbf24;
-  --danger-color: #f87171;
+  --danger-color: #f43f5e;
 
-  --border-color: #374151;
+  --border-color: #1e293b;
   
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
@@ -58,6 +60,27 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
   line-height: 1.5;
   min-height: 100vh;
+}
+
+/* App Layout - Global Sidebar Restructuring */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 3rem;
+  overflow-y: auto;
 }
 
 a {
@@ -195,4 +218,53 @@ ul {
   height: 100%;
   border-radius: var(--radius-lg);
   z-index: 1; /* For stacking correctly with navbar/modals */
+}
+
+/* Responsive UI Logic */
+.hamburger-menu {
+  display: none !important;
+}
+
+@media (max-width: 1040px) {
+  .app-layout {
+    position: relative;
+  }
+  
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: -320px;
+    height: 100vh;
+    z-index: 1000 !important;
+    transition: left 0.3s ease;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .sidebar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .hamburger-menu {
+    display: flex !important;
+  }
+  
+  .main-content {
+    padding: 1.5rem !important;
+  }
 }

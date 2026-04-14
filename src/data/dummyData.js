@@ -1,36 +1,65 @@
+// Panipat Area Coordinates ~ 29.3909, 76.9635
+
 export const mockRoutes = [
   {
     id: 'r1',
     name: 'North Campus Loop',
     stops: [
-      { id: 's1', name: 'Main Gate', lat: 40.7128, lng: -74.0060 },
-      { id: 's2', name: 'Library', lat: 40.7140, lng: -74.0050 },
-      { id: 's3', name: 'Science Block', lat: 40.7150, lng: -74.0030 },
-      { id: 's4', name: 'North Hostel', lat: 40.7145, lng: -74.0080 },
+      { id: 's1', name: 'Main Gate', lat: 29.3950, lng: 76.9650 },
+      { id: 's2', name: 'Library', lat: 29.3980, lng: 76.9680 },
+      { id: 's3', name: 'Science Block', lat: 29.4000, lng: 76.9600 },
+      { id: 's4', name: 'North Hostel', lat: 29.3950, lng: 76.9550 },
     ],
     path: [
-      [40.7128, -74.0060],
-      [40.7140, -74.0050],
-      [40.7150, -74.0030],
-      [40.7145, -74.0080],
-      [40.7128, -74.0060] // Loop back
+      [29.3950, 76.9650],
+      [29.3980, 76.9680],
+      [29.4000, 76.9600],
+      [29.3950, 76.9550],
+      [29.3950, 76.9650] // Loop back
     ]
   },
   {
     id: 'r2',
-    name: 'South Engineering Express',
+    name: 'South Express',
     stops: [
-      { id: 's1', name: 'Main Gate', lat: 40.7128, lng: -74.0060 },
-      { id: 's5', name: 'Student Union', lat: 40.7110, lng: -74.0040 },
-      { id: 's6', name: 'Engineering Dept', lat: 40.7090, lng: -74.0020 },
-      { id: 's7', name: 'Sports Complex', lat: 40.7100, lng: -74.0080 },
+      { id: 's1', name: 'Main Gate', lat: 29.3900, lng: 76.9600 },
+      { id: 's5', name: 'Student Union', lat: 29.3850, lng: 76.9580 },
+      { id: 's6', name: 'Engineering Dept', lat: 29.3800, lng: 76.9650 },
+      { id: 's7', name: 'Sports Complex', lat: 29.3850, lng: 76.9700 },
     ],
     path: [
-      [40.7128, -74.0060],
-      [40.7110, -74.0040],
-      [40.7090, -74.0020],
-      [40.7100, -74.0080],
-      [40.7128, -74.0060]
+      [29.3900, 76.9600],
+      [29.3850, 76.9580],
+      [29.3800, 76.9650],
+      [29.3850, 76.9700],
+      [29.3900, 76.9600]
+    ]
+  },
+  {
+    id: 'r3',
+    name: 'City Shuttle',
+    stops: [
+      { id: 's8', name: 'Panipat Station', lat: 29.3920, lng: 76.9750 },
+      { id: 's9', name: 'Market Hub', lat: 29.3960, lng: 76.9800 },
+    ],
+    path: [
+      [29.3920, 76.9750],
+      [29.3960, 76.9800],
+      [29.3920, 76.9750]
+    ]
+  },
+  {
+    id: 'r4',
+    name: 'Evening Special',
+    stops: [
+      { id: 's10', name: 'Hostel A', lat: 29.3880, lng: 76.9500 },
+      { id: 's11', name: 'Hostel B', lat: 29.4020, lng: 76.9500 },
+    ],
+    path: [
+      [29.3880, 76.9500],
+      [29.3950, 76.9550], // intersects north loop
+      [29.4020, 76.9500],
+      [29.3880, 76.9500]
     ]
   }
 ];
@@ -41,33 +70,52 @@ export const mockBuses = [
     busNumber: '101',
     routeId: 'r1',
     status: 'On Time',
-    lat: 40.7135,
-    lng: -74.0055,
+    lat: 29.3950,
+    lng: 76.9650,
     nextStop: 'Library',
     eta: '2 mins',
-    pathIndex: 0
+    pathIndex: 0,
+    crowdLevel: 'Low',
+    colorHex: '#10b981' // Green
   },
   {
     id: 'b2',
-    busNumber: '205',
+    busNumber: '102',
     routeId: 'r2',
     status: 'Delayed',
-    lat: 40.7110,
-    lng: -74.0040,
-    nextStop: 'Engineering Dept',
+    lat: 29.3900,
+    lng: 76.9600,
+    nextStop: 'Student Union',
     eta: '5 mins',
     delayMinutes: 5,
-    pathIndex: 1
+    pathIndex: 0,
+    crowdLevel: 'Medium',
+    colorHex: '#f59e0b' // Orange/Yellow
   },
   {
     id: 'b3',
-    busNumber: '102',
-    routeId: 'r1',
+    busNumber: '201',
+    routeId: 'r3',
     status: 'On Time',
-    lat: 40.7148,
-    lng: -74.0035,
-    nextStop: 'North Hostel',
-    eta: '4 mins',
-    pathIndex: 2
+    lat: 29.3920,
+    lng: 76.9750,
+    nextStop: 'Market Hub',
+    eta: '7 mins',
+    pathIndex: 0,
+    crowdLevel: 'Full',
+    colorHex: '#06b6d4' // Cyan
+  },
+  {
+    id: 'b4',
+    busNumber: '301',
+    routeId: 'r4',
+    status: 'On Time',
+    lat: 29.3880,
+    lng: 76.9500,
+    nextStop: 'Hostel B',
+    eta: '3 mins',
+    pathIndex: 0,
+    crowdLevel: 'Low',
+    colorHex: '#ef4444' // Red
   }
 ];

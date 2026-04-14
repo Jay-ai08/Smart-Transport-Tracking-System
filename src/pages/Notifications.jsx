@@ -10,7 +10,7 @@ const Notifications = () => {
 
   return (
     <div className="flex flex-col gap-6 max-w-[800px] mx-auto">
-      <h1 className="text-2xl font-bold">Alerts & Notifications</h1>
+      <h1 className="text-2xl font-bold">ETA & Notifications</h1>
 
       <div className="flex flex-col gap-4">
         {delayedBuses.length > 0 ? (

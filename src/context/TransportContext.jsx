@@ -20,7 +20,7 @@ export const TransportProvider = ({ children }) => {
           // Let's just move them to the next point slowly by moving logic
           let nextIndex = bus.pathIndex + 1;
           if (nextIndex >= route.path.length) nextIndex = 0;
-          
+
           const currentPos = route.path[bus.pathIndex];
           const nextPos = route.path[nextIndex];
 
@@ -40,14 +40,14 @@ export const TransportProvider = ({ children }) => {
           let status = bus.status;
           let delayMinutes = bus.delayMinutes || 0;
           if (Math.random() < 0.05) {
-             const isDelayed = Math.random() > 0.8;
-             if (isDelayed) {
-               status = 'Delayed';
-               delayMinutes = Math.floor(Math.random() * 10) + 1;
-             } else {
-               status = 'On Time';
-               delayMinutes = 0;
-             }
+            const isDelayed = Math.random() > 0.8;
+            if (isDelayed) {
+              status = 'Delayed';
+              delayMinutes = Math.floor(Math.random() * 10) + 1;
+            } else {
+              status = 'On Time';
+              delayMinutes = 0;
+            }
           }
 
           return {

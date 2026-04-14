@@ -1,48 +1,89 @@
 import React, { useContext, useState } from 'react';
 import { TransportContext } from '../context/TransportContext';
 import BusCard from '../components/BusCard';
-import MapView from '../components/MapView';
+import { ArrowRight, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const { buses } = useContext(TransportContext);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const filteredBuses = buses.filter(bus => 
     bus.busNumber.includes(searchTerm) || bus.routeId.includes(searchTerm)
   );
 
+  const onTimeCount = buses.filter(b => b.status === 'On Time').length;
+  const delayedCount = buses.filter(b => b.status === 'Delayed').length;
+
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Campus Dashboard</h1>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
+      
+      {/* Header Block */}
+      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', color: 'var(--text-primary)', margin: 0, lineHeight: '1.2' }}>Dashboard</h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Real-time bus tracking and status updates</p>
+        </div>
+        <button 
+          onClick={() => navigate('/live')}
+          className="btn btn-primary" 
+          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'var(--primary-color)', color: '#000', fontWeight: '600', padding: '0.6rem 1.25rem', borderRadius: '8px', border: 'none', cursor: 'pointer', marginBottom: '0.2rem' }}
+        >
+          View Live Map <ArrowRight size={16} />
+        </button>
+      </div>
+
+      {/* Dark Search Bar */}
+      <div style={{ position: 'relative', marginTop: '0.5rem' }}>
+        <div style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center' }}>
+          <Search size={18} />
+        </div>
         <input 
           type="text" 
-          placeholder="Search bus or route..." 
-          className="card"
-          style={{ padding: '0.5rem 1rem', width: '300px' }}
+          placeholder="Search by bus number or route..." 
+          style={{ 
+            width: '100%',
+            padding: '1rem 1rem 1rem 3rem', 
+            borderRadius: '12px', 
+            backgroundColor: 'var(--surface-color)', 
+            border: '1px solid var(--border-color)',
+            outline: 'none',
+            fontSize: '0.9rem',
+            color: 'var(--text-primary)',
+            boxSizing: 'border-box'
+          }}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="md:col-span-2 flex flex-col gap-4">
-          <h2 className="text-xl font-bold">Fleet Overview</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredBuses.map(bus => (
-              <BusCard key={bus.id} bus={bus} />
-            ))}
-            {filteredBuses.length === 0 && (
-              <p className="text-secondary">No buses found.</p>
-            )}
-          </div>
+      {/* Stats Row */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+        <div className="card" style={{ padding: '1.25rem', backgroundColor: 'var(--surface-color)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <span style={{ fontSize: '2.25rem', fontWeight: 'bold', marginBottom: '0.25rem', color: 'var(--success-color)' }}>{onTimeCount}</span>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>On Time</span>
         </div>
-
-        <div className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold">Quick Map Map</h2>
-          <MapView fullMode={false} />
+        <div className="card" style={{ padding: '1.25rem', backgroundColor: 'var(--surface-color)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <span style={{ fontSize: '2.25rem', fontWeight: 'bold', marginBottom: '0.25rem', color: 'var(--danger-color)' }}>{delayedCount}</span>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Delayed</span>
+        </div>
+        <div className="card" style={{ padding: '1.25rem', backgroundColor: 'var(--surface-color)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <span style={{ fontSize: '2.25rem', fontWeight: 'bold', marginBottom: '0.25rem', color: 'var(--primary-color)' }}>{buses.length}</span>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Total Buses</span>
         </div>
       </div>
+
+      {/* Bus Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem', marginTop: '1.5rem', position: 'relative' }}>
+        {filteredBuses.map(bus => (
+          <BusCard key={bus.id} bus={bus} />
+        ))}
+        {filteredBuses.length === 0 && (
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>No buses found.</p>
+        )}
+      </div>
+      
     </div>
   );
 };
