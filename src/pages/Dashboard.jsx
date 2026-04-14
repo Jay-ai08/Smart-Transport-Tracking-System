@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { TransportContext } from '../context/TransportContext';
+import { AuthContext } from '../context/AuthContext';
 import BusCard from '../components/BusCard';
 import { ArrowRight, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const { buses } = useContext(TransportContext);
+  const { user } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
@@ -15,15 +17,20 @@ const Dashboard = () => {
 
   const onTimeCount = buses.filter(b => b.status === 'On Time').length;
   const delayedCount = buses.filter(b => b.status === 'Delayed').length;
+  const displayName = user?.email?.split('@')[0] || 'Driver';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
       
       {/* Header Block */}
-      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', color: 'var(--text-primary)', margin: 0, lineHeight: '1.2' }}>Dashboard</h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Real-time bus tracking and status updates</p>
+          <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', color: 'var(--text-primary)', margin: 0, lineHeight: '1.2' }}>
+            Welcome, {displayName}
+          </h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+            Signed in as {user?.role?.toUpperCase() || 'USER'} for campus transport tracking.
+          </p>
         </div>
         <button 
           onClick={() => navigate('/live')}
@@ -57,6 +64,21 @@ const Dashboard = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
+
+      {/* User Info Row */}
+      {user && (
+        <div className="card" style={{ padding: '1.25rem', backgroundColor: 'var(--surface-color)', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(250px, 320px)', gap: '1rem', alignItems: 'center' }}>
+          <div>
+            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current user</p>
+            <h2 style={{ margin: '0.65rem 0 0', fontSize: '1.45rem', color: 'var(--text-primary)' }}>{user.email}</h2>
+            <p style={{ margin: '0.5rem 0 0', color: 'var(--text-secondary)' }}>Role: {user.role.toUpperCase()}</p>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '0.75rem' }}>
+            <span style={{ padding: '0.6rem 1rem', borderRadius: '999px', background: 'rgba(56, 189, 248, 0.12)', color: '#7dd3fc', fontWeight: 700 }}>Stored</span>
+            <span style={{ color: 'var(--text-secondary)' }}>Data saved in browser</span>
+          </div>
+        </div>
+      )}
 
       {/* Stats Row */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
