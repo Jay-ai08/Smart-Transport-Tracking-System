@@ -67,15 +67,11 @@ const Dashboard = () => {
 
       {/* User Info Row */}
       {user && (
-        <div className="card" style={{ padding: '1.25rem', backgroundColor: 'var(--surface-color)', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(250px, 320px)', gap: '1rem', alignItems: 'center' }}>
+        <div className="card" style={{ padding: '1.25rem', backgroundColor: 'var(--surface-color)', display: 'grid', gridTemplateColumns: '1fr', gap: '1rem', alignItems: 'center' }}>
           <div>
             <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current user</p>
             <h2 style={{ margin: '0.65rem 0 0', fontSize: '1.45rem', color: 'var(--text-primary)' }}>{user.email}</h2>
             <p style={{ margin: '0.5rem 0 0', color: 'var(--text-secondary)' }}>Role: {user.role.toUpperCase()}</p>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '0.75rem' }}>
-            <span style={{ padding: '0.6rem 1rem', borderRadius: '999px', background: 'rgba(56, 189, 248, 0.12)', color: '#7dd3fc', fontWeight: 700 }}>Stored</span>
-            <span style={{ color: 'var(--text-secondary)' }}>Data saved in browser</span>
           </div>
         </div>
       )}
